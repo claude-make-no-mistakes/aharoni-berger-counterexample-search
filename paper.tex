@@ -1,0 +1,168 @@
+\documentclass[10pt]{article}
+\usepackage[top=0.77in,bottom=0.78in,left=0.88in,right=0.88in]{geometry}
+\usepackage[cmex10]{amsmath}
+\usepackage{amsthm}
+\usepackage[hidelinks]{hyperref}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<->cmex10}{}
+\DeclareMathSizes{10}{10}{7}{7}
+\DeclareMathSizes{9}{10}{7}{7}
+\linespread{0.96}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\title{The strong Aharoni--Berger conjecture through five colours}
+\author{Achita Anantachina}
+\date{26 November 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The strong Aharoni--Berger conjecture asks for a full rainbow matching among
+\(n\) matchings of size \(n+1\) in a bipartite graph. We verify the conjecture
+for \(n\leq5\) using three independently checked clausal refutations. One
+refutation proves a mixed-size extension theorem for four colours. Applying
+that theorem after deleting the endpoints of an edge leaves two endpoint
+patterns for five colours. We specify the finite formulas and the reductions
+that make their unsatisfiability sufficient.
+\end{abstract}
+
+\section{Statements}
+Let \(M_0,\ldots,M_{n-1}\) be matchings between disjoint left and right vertex
+sets. A full rainbow matching chooses exactly one edge from each \(M_c\), and
+all selected left endpoints and all selected right endpoints must be
+distinct. An edge can belong to several \(M_c\). The strong conjecture was
+posed by Aharoni and Berger \cite{ab} and appears as Conjecture~2.7 in the
+properly coloured bipartite multigraph formulation in \cite{dp}. Parallel
+occurrences of the same edge in different colours encode exactly the same
+instances.
+
+\begin{theorem}\label{thm:five}
+For \(1\leq n\leq5\), any \(n\) bipartite matchings with at least \(n+1\) edges
+each have a full rainbow matching.
+\end{theorem}
+
+\begin{lemma}\label{lem:mixed}
+Four bipartite matchings of sizes at least \(4,4,5,5\), respectively, have a
+full rainbow matching.
+\end{lemma}
+
+Truncating each colour to its required size preserves any obstruction, so
+we work with equality in these size thresholds. We first give the finite
+formula for Lemma~\ref{lem:mixed}. For each side, introduce a Boolean
+variable for equality of the endpoints of each unordered pair of edge
+occurrences in different colours. Set equalities within each colour to
+false. Add the three transitivity implications on every triple, simplifying
+those that involve a fixed false literal. This describes two equivalence
+relations with no repeated endpoint inside a colour. Conversely, using
+the classes as vertices makes every satisfying assignment a valid
+collection of matchings.
+
+For every selection of one occurrence of each colour, require equality of
+some pair of selected endpoints on at least one side. This adds one clause
+per selection. To reduce symmetry, choose and fix a rainbow of the first
+three colours, which exists greedily because their sizes are \(4,4,5\).
+Only three vertices on either side are occupied, so at least two edges of
+the last matching have a free left endpoint and at least two have a free
+right endpoint. In an obstruction no edge has both endpoints free. Reorder
+the last matching to put two edges of each type in four prescribed slots.
+The formula enforces these free and occupied endpoints by units and
+disjunctions. Its checked refutation proves Lemma~\ref{lem:mixed}.
+
+\section{Reduction to endpoint patterns}
+The case \(n=4\) follows from the lemma. The cases \(n=1,2\) follow by
+greedy selection. For \(n=3\) we use the following elementary observation.
+
+\begin{proof}[Auxiliary three-colour argument]
+Write the third size-four matching as the diagonal on four indices.
+If no rainbow exists, any edge \(i\to j\) of the first size-three matching
+can be paired with an edge of the second, since it blocks at most two of
+its three edges. Such a pair must hit all four diagonal edges. Therefore
+every edge of the first two matchings is a loopless arc on these indices.
+For each first-colour arc the second colour must supply an arc on the
+complementary pair. Three arcs with distinct tails and heads on four
+indices form a directed 3-cycle, a 2-cycle and a disjoint arc, or a directed
+path with three arcs. A 3-cycle requires three second-colour arcs incident
+with the fourth index, which is impossible. For a 2-cycle and a disjoint
+arc, the latter requires a second-colour arc on the 2-cycle, whose reverse
+in the first colour gives a rainbow with an unused diagonal. For the path
+\(1\to2\to3\to4\), the required unordered pairs in the second colour are
+\(34,14,12\). Reversing either end arc again gives an unused diagonal.
+Otherwise the pair \(14\) must be oriented \(4\to1\), and together with
+\(1\to2\) it misses diagonal index 3. This proves the auxiliary claim.
+\end{proof}
+
+Suppose five matchings, each of size six, form an obstruction. For each
+edge \(e\) in colour \(c\), delete its endpoints. Every other colour loses at
+most two edges. If at least two of those colours lost at most one edge,
+Lemma~\ref{lem:mixed} would give a rainbow after deletion, and we could add
+\(e\). Thus \(e\) must destroy two distinct edges in at least three of the
+other four colours.
+
+Every used endpoint therefore belongs to at least four colours. There are
+30 incidences on each side, so each side has six or seven vertices. On a
+side of size six every colour uses all vertices. On a side of size seven
+there is one vertex missing each colour, and those five vertices are
+distinct. The remaining two vertices are common to all five colours.
+The edge condition also implies that an edge occurs in at most two
+colours, or just one if either endpoint misses a colour.
+
+If both sides have seven vertices, join only equal missing labels when
+both endpoints miss a colour. Two different missing labels would cause
+the edge to destroy at most one edge in two colours. Each colour uses four
+labelled vertices per side and at most two can go to common vertices on
+the opposite side. It therefore uses at least two equal-label edges. Each
+can appear only once across colours, and there are only five such edges.
+This contradicts the required ten uses.
+
+\section{The remaining formulas}
+By exchanging the sides if needed, there are six left vertices and either
+six or seven right vertices. Label the right vertices arbitrarily in the
+six-vertex case. In the seven-vertex case, label the missing vertices by
+their colours \(0,\dots,4\), and the common vertices by 5 and 6. Relabel the
+left vertices so that colour 0 is the fixed matching pairing them in order
+with its eligible right vertices. The following clauses specify each
+remaining formula.
+
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\item Six variables are fixed true for the prescribed colour-0 edges.
+The other variables register the edges in the four remaining colours.
+Each such colour has exactly one edge through each eligible row and column.
+\item Each cell has multiplicity at most two, including occurrences in
+colour 0. If its right vertex misses a colour, the cap is one.
+\item For each fixed colour-0 edge and each choice of four more edges with
+distinct rows and columns, require at least one of the four variables to
+be false.
+\end{enumerate}
+
+An actual obstruction gives a satisfying assignment in one of these two
+formulas. Both have checked refutations, which completes the proof of
+Theorem~\ref{thm:five}.
+
+\section{Certificates and scope}
+\begin{center}
+\begin{tabular}{lrrl}
+Formula & Variables & Clauses & Producer \\ \hline
+Four colours of sizes \(4,4,5,5\) & 242 & 3,438 & Glucose 4 \\
+Five colours on \(6\times6\) endpoints & 150 & 87,354 & CaDiCaL 1.9.5 \\
+Five colours on \(6\times7\) endpoints & 150 & 146,634 & CaDiCaL 1.9.5
+\end{tabular}
+\end{center}
+The accompanying repository archives the DIMACS formulas and DRAT traces.
+Its replay regenerates the clauses before passing them to DRAT-trim.
+The three refutations establish the stated finite cases. The unrestricted
+conjecture remains open, and we make no priority assertion for the finite
+results.
+
+\paragraph{Acknowledgement.}
+The search and manuscript used AI assistance. The archived refutations
+were replayed with an independent checker.
+
+\begin{thebibliography}{9}
+\bibitem{ab} R. Aharoni and E. Berger. Rainbow matchings in \(r\)-partite
+\(r\)-graphs. \emph{Electron. J. Combin.} 16 (2009), R119.
+\href{https://doi.org/10.37236/208}{doi:10.37236/208}.
+\bibitem{dp} M. Delcourt and L. Postle. Finding an almost perfect matching
+in a hypergraph avoiding forbidden submatchings. \emph{J. Lond. Math. Soc.}
+114 (2026), e70660. \href{https://doi.org/10.1112/jlms.70660}{doi:10.1112/jlms.70660}.
+\end{thebibliography}
+\end{document}

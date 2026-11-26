@@ -1,0 +1,3 @@
+{"case": "mixed44", "variables": 242, "clauses": 3438, "cnf_sha256": "d70ee283edaa3f987f76e35a2772534d1ebc3bfd87ebed82e5a9be224fb313ea", "drat_sha256": "5ac945ef69f4c2318e6e46d9852d5dba45d0c9901d5eaf663994eb4974b9da8c", "drat_verified": true}
+{"case": "six-by-six", "variables": 150, "clauses": 87354, "cnf_sha256": "3c116299ea2e519c96264ef24100b4e2294a72f91e04cc06bb1af7b3a5a79ff7", "drat_sha256": "98c29c9fed380d1c803fccd76ab8ed021a0b79c09ab96f75e47e4071217ef499", "drat_verified": true}
+{"case": "six-by-seven", "variables": 150, "clauses": 146634, "cnf_sha256": "0e12469460396cda2b792c79e7d54be271e58150525492662f408cf564860e3d", "drat_sha256": "2d341eb757180edd8b4f0054ce9758b23da49c0b8669cb62d911458e8cd404ee", "drat_verified": true}
